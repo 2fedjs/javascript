@@ -1,0 +1,73 @@
+﻿JavaScript Fundamentals
+2.5 Data types
+	http://javascript.info/task/string-quotes
+2.6 Type Conversions
+	http://javascript.info/task/primitive-conversions-questions
+2.7 Operators
+	http://javascript.info/task/increment-order
+	http://javascript.info/task/assignment-result
+2.8 Comparisons
+	http://javascript.info/task/comparison-questions
+2.9 Interaction: alert, prompt, confirm
+	http://javascript.info/task/simple-page
+2.10 Conditional operators: if, '?'
+	http://javascript.info/task/if-zero-string
+	http://javascript.info/task/check-standard
+	http://javascript.info/task/sign
+	http://javascript.info/task/rewrite-if-question
+	http://javascript.info/task/rewrite-if-else-question
+2.11 Logical operators
+	http://javascript.info/task/alert-null-2-undefined
+	http://javascript.info/task/alert-or
+	http://javascript.info/task/alert-1-null-2
+	http://javascript.info/task/alert-and
+	http://javascript.info/task/alert-and-or
+	http://javascript.info/task/check-if-in-range
+	http://javascript.info/task/check-if-out-range
+	http://javascript.info/task/if-question
+	http://javascript.info/task/check-login
+2.12 Loops: while and for
+	http://javascript.info/task/loop-last-value
+	http://javascript.info/task/which-value-while
+	http://javascript.info/task/which-value-for
+	http://javascript.info/task/for-even
+	http://javascript.info/task/replace-for-while
+	http://javascript.info/task/repeat-until-correct
+	http://javascript.info/task/list-primes
+2.13 The "switch" statement
+	http://javascript.info/task/rewrite-switch-if-else
+	http://javascript.info/task/rewrite-if-switch
+2.14 Functions
+	http://javascript.info/task/if-else-required
+	http://javascript.info/task/rewrite-function-question-or
+	http://javascript.info/task/min
+	http://javascript.info/task/pow
+2.15 Function expressions and arrows
+	http://javascript.info/task/rewrite-arrow
+
+4.1 Objects
+	http://javascript.info/task/hello-object
+	http://javascript.info/task/is-empty
+	http://javascript.info/task/const-object
+	http://javascript.info/task/sum-object
+	http://javascript.info/task/multiply-numeric
+4.4 Object methods, "this"
+	http://javascript.info/task/check-syntax
+	http://javascript.info/task/why-this
+	http://javascript.info/task/object-property-this
+	http://javascript.info/task/calculator
+	http://javascript.info/task/chain-calls
+4.6 Constructor, operator "new"
+	http://javascript.info/task/two-functions-one-object
+	http://javascript.info/task/calculator-constructor
+	http://javascript.info/task/accumulator
+
+5.1 Methods of primitives
+	http://javascript.info/task/string-new-property
+5.2 Numbers
+	http://javascript.info/task/sum-interface
+	http://javascript.info/task/why-rounded-down
+	http://javascript.info/task/repeat-until-number
+	http://javascript.info/task/endless-loop-error
+	http://javascript.info/task/random-min-max
+	http://javascript.info/task/random-int-min-max
