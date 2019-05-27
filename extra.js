@@ -1,13 +1,8 @@
-﻿[1, 2].forEach(alert)
+﻿
+valueOf
 
-(function() {
-  'use strict';
+ String.fromCharCode и str.charCodeAt
 
-  // ...your code...
-})()
+<script type="module">
 
-let phrase = `can embed ${str}`;
-
-obj.__proto__ 
-
-parseInt
+window.Promise
