@@ -1,8 +1,10 @@
 ﻿
-valueOf
 
- String.fromCharCode и str.charCodeAt
 
-<script type="module">
+  fetch(url);
 
-window.Promise
+
+
+
+
+  inspect(node)

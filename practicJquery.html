@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.answer{
+			display: none;
+		}
+
+		.item{
+			display: block;
+			width: 100px;
+			height: 20px;
+			background-color: #000;
+			margin:20px;
+		}
+
+		.to-up{
+			display: none;
+			position: fixed;
+			bottom:150px;
+			left:20px;
+			background-color: #000;
+		}
+
+		.menu.active{
+			position: fixed;
+			top:10px;
+		}
+
+		a.active{
+			color:red;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+	<div class="items">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+	<div class="question">Вопрос 1</div>
+	<div class="answer">Ответ 1</div>
+	<div class="question">Вопрос 2</div>
+	<div class="answer">Ответ 2</div>
+	<div class="question">Вопрос 3</div>
+	<div class="answer">Ответ 3</div>
+	<div class="question">Вопрос 4</div>
+	<div class="answer">Ответ 4</div>
+	<div class="question">Вопрос 5</div>
+	<div class="answer">Ответ 5</div>
+	<div class="question">Вопрос 6</div>
+	<div class="answer">Ответ 6</div>
+	<div class="menu">
+		<a href="#about">О курсе</a>
+		<a href="#price">Цена</a>
+		<a href="#app">Запись</a>
+		<a href="#nz">NZ</a>
+	</div>
+	<div class="content">
+		<h2 id="about">О курсе</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!</p>
+		<h2 id="price">Цена</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!</p>
+		<h2 id="app">Запись</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!</p>
+		<h2 id="nz">NZ</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptas earum quas, sed placeat minima libero eius inventore assumenda cum dolorem corporis recusandae aperiam aliquid vel natus a nulla unde consequatur, dolores fugiat asperiores iste facilis quo temporibus. Excepturi magni tempore perferendis, sunt! Accusamus dignissimos nisi, repellendus asperiores tenetur, facilis, officia possimus maxime est laudantium iusto error. Temporibus ex vitae facilis illo alias id voluptate, vel reprehenderit. Culpa praesentium vero nobis saepe eos dolorum cum sed qui sunt velit provident in expedita similique, accusantium enim quis eligendi non maxime nostrum, mollitia possimus, ad consectetur debitis repellendus. Placeat suscipit asperiores quod!</p>
+	</div>
+	<a href="#" class="to-up">Наверх</a>
+	<script>
+		$(function(){
+			$( ".question" ).on("click",function() {
+				$( ".answer" ).not($(this).next()).slideUp();
+			 	$(this).next().slideToggle();
+			});
+
+			$(".item").one("click", function(e){
+				console.log(e);
+				$(this).stop(true, true).fadeOut(300).fadeIn(300).fadeOut(300).fadeIn(300)
+			});
+			$(".item").on("contextmenu", function(e){
+				console.log(e);
+				e.preventDefault();
+				$(this).animate({
+					height: 10,
+					height: "+=10px"
+				},500).animate({
+					width: 10
+				},500);
+			});
+
+			$(".menu a").on("click", function(e){
+				e.preventDefault();
+				let elem = $($(this).attr("href"));
+
+				$("html, body").animate({
+					scrollTop: elem.offset().top
+				},700)
+			});
+
+			let menuItems = $(".menu a");
+			let menuH = $("h2");
+			menuH.each(function(i, v){
+					console.log($(v).offset().top)
+				});
+			
+			let offsetTopMenu = $(".menu").offset().top;
+			$(document).on("scroll", function(){
+				if($(this).scrollTop() > 100){
+					$(".to-up").show();
+				} else {
+					$(".to-up").hide();
+				}
+				if($(this).scrollTop()>offsetTopMenu){
+					$(".menu").addClass("active");
+				} else {
+					$(".menu").removeClass("active");
+				}
+
+				menuItems.each(function(){
+					console.log($(this).attr("href"))
+				});
+			});
+
+			$(".to-up").on("click", function(e){
+				e.preventDefault();
+				$("html, body").animate({
+					scrollTop: 0
+				},700)
+			});
+		})
+		
+	</script>
+</body>
+
+</html>

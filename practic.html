@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		#gallery{
+			text-align: center;
+			width: 200px;
+		}
+
+		#gallery .photos{
+			position: relative;
+			height: 100px;
+		}
+
+		img{
+			width: 100%;
+			height: 100px;
+			position: absolute;
+			left:0;
+			opacity: 0;
+			transition: opacity 1s;
+		}
+
+		img.showed{
+			opacity: 1;
+		}
+		
+		#home-work{
+			display: block;
+		}
+
+		.items, .cubes{
+			display: flex;
+		}
+
+		.items .item{
+			width:40px;
+			height: 40px;
+			background-color: #eee;
+			margin:5px;
+			box-sizing: border-box;
+		}
+
+		.items .item.active{
+			border:1px solid red;
+		}
+
+		 .cubes .cube{
+			width: 50px;
+			height: 50px;
+			margin: 5px;
+			background-color: #eee;
+			box-sizing: border-box;
+		}
+
+		.cubes .cube.active-cube{
+			border: 1px solid red;
+		}
+
+		input:invalid {
+		  border: 2px dashed red;
+		}
+
+		input:valid {
+		  border: 2px solid black;
+		}
+
+		.modal{
+			display: none;
+			background-color: #fff;
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			padding: 100px;
+		}
+
+		.overlay{
+			display: none;
+			background-color: #000;
+			opacity: 0.3;
+			cursor: pointer;
+			position: fixed;
+			top:0;
+			left:0;
+			bottom:0;
+			right:0;
+		}
+
+		.modal.open, .overlay.open{
+			display: block;
+		}
+
+	</style>
+</head>
+<body>
+
+	<form action="#">
+		<input type="text" placeholder="Имя" required>
+		<input type="email" placeholder="Почта" required>
+		<input type="number" required>
+		<input type="submit" value="Отправить">
+	</form>
+
+	<div class="inputs">
+		<input type="text">
+		<input type="text">
+		<input type="text">
+	</div>
+
+	<div class="cubes">
+		<div class="cube"></div>
+		<div class="cube"></div>
+		<div class="cube"></div>
+		<div class="cube"></div>
+		<div class="cube"></div>
+		<div class="cube"></div>
+	</div>
+
+	<div class="calculator">
+		<input type="text" name="numOne"> и
+		<input type="text" name="numTwo">
+		<button type="button" name="sum">+</button>
+		<button type="button" name="min">-</button>
+		<button type="button" name="divis">/</button>
+		<button type="button" name="mul">*</button>
+		<span class="calc-res"></span>
+	</div>
+	
+
+	<div class="items">
+		<div class="item" data-price="2500">Товар 1</div>
+		<div class="item" data-price="2000">Товар 2</div>
+		<div class="item" data-price="1500">Товар 3</div>
+		<div class="item" data-price="3500">Товар 4</div>
+	</div>
+	<div class="value">0</div>
+
+	<div class="actions">
+		<button type="button" name="save">Save</button>
+		<button type="button" name="delete">Delete</button>
+	</div>
+
+	
+	
+
+	<div id="gallery">
+		<div class="photos">
+			<img src="" alt="" style="background-color: red" class="showed">
+			<img src="" alt="" style="background-color: blue">
+			<img src="" alt="" style="background-color: yellow">
+			<img src="" alt="" style="background-color: green">
+			<img src="" alt="" style="background-color: brown">
+			<img src="" alt="" style="background-color: pink">
+			<img src="" alt="" style="background-color: orange">
+			<img src="" alt="" style="background-color: purple">
+		</div>
+		<div class="buttons">
+			<button class="prev" type="button">Назад</button>
+			<button class="next" type="button">Вперед</button>
+		</div>
+	</div>
+
+	<div id="home-work">
+		<button type="button" id="testmodal">Открыть модалку</button>
+	</div>
+
+	<script>
+
+		class Modal{
+			constructor(className){
+				this.overlay = document.createElement("div");
+				this.overlay.classList.add("overlay");
+				document.body.appendChild(this.overlay);
+
+				 this.modal = document.createElement("div");
+				 this.modal.classList.add("modal");
+				 this.modal.classList.add(className);
+				  document.body.appendChild(this.modal);
+			}
+
+			open(html){
+				this.modal.innerHTML = html;
+				this.modal.classList.add("open");
+				this.overlay.classList.add("open");
+			}
+
+			close(){
+				this.modal.classList.remove("open");
+				this.overlay.classList.remove("open");
+			}
+		}
+
+		let popup = new Modal("testmodal");
+
+		document.querySelector("#testmodal").addEventListener("click", function(){popup.open("Привет!")});
+		document.querySelector(".overlay").addEventListener("click", function(){popup.close()});
+
+		/*function $(selector){
+			this.elements = document.querySelectorAll("selector");
+			return new OurJquery(elements);
+		}*/
+
+		class ${
+			constructor(selector){
+				this.elems = document.querySelectorAll(selector);
+			}
+
+			on(event, callback){
+				this.elems.forEach(item=>item.addEventListener(event, callback));
+
+				return this;
+			}
+
+			//
+		}
+
+		(new $(".inputs input")).on("focus", function(){this.style.border = "2px solid red"}).on("blur", function(){this.style.border = "2px solid #ccc"})
+
+		window.onload = function(evt){
+
+			document.querySelectorAll(".cubes .cube").forEach(item=>{item.onclick = activeCube;});
+
+			function activeCube(){
+				this.classList.toggle("active-cube");
+			}
+
+			setInterval(() => {
+				activeCube.call(document.querySelectorAll(".cubes .cube")[getRandomInt(0, document.querySelectorAll(".cubes .cube").length - 1)]);
+			}, 500);
+
+			let items = document.querySelectorAll(".items .item");
+
+			items.forEach(function(item){item.onclick = function(){
+				this.classList.toggle("active");
+				//console.log(document.querySelectorAll(".items .item.active").dataset.price);
+				document.querySelector(".value").innerHTML = +[].reduce.call(document.querySelectorAll(".items .item.active"),(sum, current) => sum + +current.dataset.price, 0);
+			}});
+
+			let buttons = document.querySelectorAll(".actions button");
+
+
+			buttons.forEach(item=>item.onclick = btnClick)
+
+
+			document.querySelectorAll(".calculator button").forEach(item=>{item.onclick = calcRes;});
+			document.querySelectorAll(".calculator input").forEach(item=>item.oninput = function(){document.querySelectorAll(".calculator button").forEach(item=>{item.disabled = false;});});
+			
+			function calcRes(){
+				switch (this.name) {
+				  case "sum":
+				   document.querySelector(".calculator .calc-res").innerHTML = +document.querySelector(".calculator input[name=numOne]").value + +document.querySelector(".calculator input[name=numTwo]").value;
+				   this.disabled = true;
+				    break;
+				  case "min":
+				    document.querySelector(".calculator .calc-res").innerHTML = document.querySelector(".calculator input[name=numOne]").value - document.querySelector(".calculator input[name=numTwo]").value;
+				    this.disabled = true;
+				    break;
+				   case "divis":
+				    document.querySelector(".calculator .calc-res").innerHTML = document.querySelector(".calculator input[name=numOne]").value / document.querySelector(".calculator input[name=numTwo]").value;
+				    this.disabled = true;
+				    break;
+				   case "mul":
+				    document.querySelector(".calculator .calc-res").innerHTML = +document.querySelector(".calculator input[name=numOne]").value * +document.querySelector(".calculator input[name=numTwo]").value;
+				    this.disabled = true;
+				    break;
+				  default:
+				    alert( "I don't know such values" );
+				}
+			}
+
+
+
+
+		//	let btnPrev = document.querySelector(".buttons .prev");
+		//	let btnNext = document.querySelector(".buttons .next");
+		//	let images = document.querySelectorAll(".photos img");
+
+			let slider = new Slider({
+				images: ".photos img",
+				btnPrev: ".buttons .prev",
+				btnNext: ".buttons .next"
+			});
+			//btnPrev.onclick = function(){slider.prev()};
+			//btnNext.onclick = function(){slider.next()};
+
+			/*let timerId = setInterval(() => {
+				images[i].classList.remove("showed");
+				i++;
+				if(i >= images.length){
+					i = 0;
+					userCallback();
+				}
+				images[i].classList.add("showed");
+				
+			}, 2000);*/
+
+			function userCallback(){
+				clearInterval(timerId);
+			}
+
+	
+		}
+
+		class Slider {
+			constructor(slider){
+				this.images = document.querySelectorAll(slider.images);
+				this.btnPrev = document.querySelector(slider.btnPrev);
+				this.btnNext = document.querySelector(slider.btnNext);
+				this.i = 0;
+				this.btnNext.onclick = this.next.bind(this);
+				this.btnPrev.onclick = this.prev.bind(this);
+			}
+			
+
+			prev(){
+				this.images[this.i].classList.remove("showed");
+				this.i--;
+				if(this.i < 0)
+					this.i= this.images.length - 1
+				this.images[this.i].classList.add("showed");
+			}
+
+			next(){
+				this.images[this.i].classList.remove("showed");
+				this.i++;
+				if(this.i >= this.images.length)
+					this.i = 0
+				this.images[this.i].classList.add("showed");
+			}
+
+		}
+
+		function btnClick(e){
+			/*for (let key in this.attributes){
+				console.log(key + ": " + this.attributes[key]);
+			}*/
+			switch (this.name) {
+			  case "save":
+			   console.log(1);
+			    break;
+			  case "delete":
+			    console.log(2);
+			    break;
+			  default:
+			    alert( "I don't know such values" );
+			}
+
+		}
+
+		/*распечатать все свойства объекта*/
+		function printObj(obj){
+			var res = "<ul>"
+
+			for(i in obj)
+				res += "<li><b>" + i + "</b>: " + obj[i] + "</li>";
+
+			res += "</ul>"
+			document.write(res)
+		}
+
+		//let text = document.querySelector("#text");
+		//printObj(text.style)
+		function getRandomInt(min, max) {
+		  return Math.floor(Math.random() * (max - min)) + min;
+		}
+
+
+	</script>
+</body>
+</html>
