@@ -587,6 +587,8 @@ promise.then(
   error => alert(`Error: ${error.message}`)
 );
 
+
+
 promise.then(script => alert('One more handler to do something else!'));
 
 /*--функция обертка Promise--*/
@@ -1249,3 +1251,38 @@ CustomValidation.prototype.checkValidity = function(input) {
     this.addInvalidity('At least 1 uppercase letter is required');
   }
 };
+
+
+/*#аозобновляемая загрузка*/
+
+function Uploader(file, onSuccess, onFail, onProgress) {
+
+  var fileId = file.name + '-' + file.size + '-' + +file.lastModifiedDate;
+
+  var errorCount = 0;
+
+  var MAX_ERROR_COUNT = 6;
+
+  function upload() {
+    ...
+  }
+
+  function pause() {
+    ...
+  }
+
+  this.upload = upload;
+  this.pause = pause;
+}
+
+/*file
+Объект File API. Может быть получен из формы, либо как результат Drag’n’Drop.
+onSuccess, onFail, onProgress
+Функции-коллбэки, которые будут вызываться в процессе (`onProgress`) и при окончании загрузки.
+Подробнее про важные данные, с которыми мы будем работать в процессе загрузки:
+fileId
+Уникальный идентификатор файла, генерируется по имени, размеру и дате модификации. По нему мы всегда сможем возобновить загрузку, в том числе и после закрытия и открытия браузера.
+startByte
+С какого байта загружать. Изначально – с нулевого.
+errorCount / MAX_ERROR_COUNT
+Текущее число ошибок / максимальное число ошибок подряд, после которого загрузка считается проваленной.*/

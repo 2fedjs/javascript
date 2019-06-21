@@ -1,0 +1,17 @@
+﻿Скачать xampp для php7
+Установить
+Из контрольной панель стартуем апач
+
+если неверный путь
+Ctrl + R and type regedit then enter
+Open this directory HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Apache2.4
+Right-click on the "ImagePath" and choose "Modify"
+Change the Value Data field with your current installed path of apache in XAMPP
+In my case, the value is "D:\apps\xampp\apache\bin\httpd.exe" -k runservice
+For the question poster case, change the value to "C:\xampp\apache\bin\httpd.exe" -k runservice
+
+сайты располагать в папке
+xampp\htdocs
+
+по пути редактировать апач для того чтобы видел локальные пути
+xampp\apache\conf\extra\httpd-vhosts.conf

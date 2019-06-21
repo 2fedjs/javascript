@@ -94,9 +94,52 @@
 			display: block;
 		}
 
+		.fields{
+			border-left:1px solid #000;
+			border-top:1px solid #000;
+			overflow:hidden;
+			display: inline-block;
+			/* display: flex;
+			    		flex-wrap: wrap; */
+		}
+
+		.fields>div{
+			width:7px;
+			height:7px;
+			box-sizing: border-box;
+			border-right:1px solid #000;
+			border-bottom:1px solid #000;
+			display: inline-block;
+			float:left;
+		}
+
+		.fields>div.start-row{
+			clear: both;
+		}
+
+		[data-game=apple]{
+			background-color: red;
+		}
+		[data-game=orange]{
+			background-color: green;
+		}
+		[data-game=banana]{
+			background-color: blue;
+		}
+
+		[data-game=snake]{
+			background-color: yellow;
+		}
+		[data-game=wall]{
+			background-color: brown;
+		}
+
 	</style>
 </head>
 <body>
+	<div class="fields"></div>
+	<span class="fields-score">0</span>
+	<input type="date">
 
 	<form action="#">
 		<input type="text" placeholder="Имя" required>
@@ -170,6 +213,169 @@
 
 	<script>
 
+		class Matrix{
+			constructor(elem){
+				this.elem = elem;
+				this.cells = [];
+				this._x = 1;
+				this._y = 1;
+			}
+
+			create(elem,x,y){
+				this._x = x;
+				this._y = y;
+				for(let i = 0; i < x*y; i++){
+					let div = document.createElement("div");
+					if(i%x==0){
+						div.classList.add("start-row")
+					}
+					div.setAttribute("data-game", "")
+					this.elem.appendChild(div);
+					this.cells[i]="";
+				}
+			}
+
+			getCell(x,y){
+				let num = this._calcNum(x,y);
+				return this.cells[num];
+			}
+
+			setCell(x,y,val){
+				let num = this._calcNum(x,y);
+				this.cells[num] = val;
+				this.elem.children[num].setAttribute("data-game", val);
+			}
+
+			_calcNum(x,y){
+				return (x-1)*this._x+(y-1)
+			}
+		}
+
+		class ElemSnake{
+			constructor(matrix, coords){
+				this.matrix = matrix;
+				this.coords = coords;
+				this.value = "";
+			}
+			show(){
+				for(let coord of this.coords){
+					this.matrix.setCell(coord[0],coord[1],this.value);
+				}
+			}
+		}
+
+		class Snake extends ElemSnake{
+			constructor(matrix,coords,course,fruits){
+				super(matrix,coords);
+				this.course = course;
+				this.alive = true;
+				this.value = "snake";
+				this.fruit = false;
+				this.fruits = fruits;
+				this.lastCourse = course;
+			}
+
+			move(){
+				if(!this.alive){
+					return;
+				}
+
+				let head = this.coords[0].slice(0);
+
+				let lastX = head[0];
+				let lastY = head[1];
+				//this.matrix.setCell(this.x,this.y,"snake");
+				switch(this.course){
+					case "right":
+						if(this.lastCourse == "left"){
+							head[1]--;
+							break;
+						}
+						this.lastCourse = this.course;
+						head[1]++;
+						break;
+					case "left":
+						if(this.lastCourse == "right"){
+							head[1]++;
+							break;
+						}
+						this.lastCourse = this.course;
+						head[1]--;
+						break;
+					case "up":
+						if(this.lastCourse == "down"){
+								head[0]++;
+								break;
+							}
+						this.lastCourse = this.course;
+
+						head[0]--;
+						break;
+					case "down":
+						if(this.lastCourse == "up"){
+								head[0]--;
+								break;
+							}
+						this.lastCourse = this.course;
+						head[0]++;
+						break;
+				}
+				if(!this._checkAlive(head, this.matrix.getCell(head[0],head[1]))){
+					this.alive = false;
+					return;
+				}
+				let tail = this.coords.pop();
+				if(this.fruits.includes(this.matrix.getCell(head[0],head[1]))){
+					this.coords.push(tail);
+					this.fruit = true;
+				} else {
+					this.fruit = false;
+				}
+				this.matrix.setCell(tail[0],tail[1],"");
+				this.coords.unshift(head);
+				this.matrix.setCell(head[0],head[1],"snake");
+				
+			}
+
+			/**/
+
+			_checkAlive(head, attr){
+				return head[1]<=this.matrix._x && head[1]>=1 && head[0]<=this.matrix._y && head[0]>=1 && attr != "wall" && attr != "snake";
+			}
+
+			
+		}
+
+		
+
+		class FruitSnake extends ElemSnake{
+			constructor(matrix, coords, fruits){
+				super(matrix, coords);
+				this.fruits = fruits;
+				this.value = fruits[0];
+				
+			}
+
+			randomFruit(){
+				let y = Math.floor(Math.random() * (this.matrix._x - 1)) + 1;
+				let x = Math.floor(Math.random() * (this.matrix._y - 1)) + 1;
+				if( this.matrix.getCell(x, y)=="" ){
+					this.value = this.fruits[Math.floor(Math.random() * this.fruits.length)];
+					return [[x,y]];
+				} else {
+					return this.randomFruit();
+				}
+
+			}
+		}
+
+		class WallSnake extends ElemSnake{
+			constructor(matrix, coords){
+				super(matrix, coords);
+				this.value = "wall";
+			}
+		}
+
 		class Modal{
 			constructor(className){
 				this.overlay = document.createElement("div");
@@ -220,7 +426,101 @@
 
 		(new $(".inputs input")).on("focus", function(){this.style.border = "2px solid red"}).on("blur", function(){this.style.border = "2px solid #ccc"})
 
+		/*function Animal(name){
+			this.name = name;
+			this.weight = 1;
+		}
+			Animal.prototype.eat = function(){
+				this.weight += 1;
+			}
+			Animal.prototype.log = function(){
+				console.log(this.name +" "+this.weight);
+			}
+
+			Cat.prototype = new Animal();
+			Cat.prototype.constructor = Cat;
+			function Cat(name){
+			Animal.call(this, name)
+			this.lifes = 9;
+			}*/
+		
+		class Animal{
+			constructor(name){
+				this.name = name;
+				this.weight = 1;
+			}
+			eat(){
+				this.weight += 1;
+			}
+			log(){
+				console.log(this.name +" "+this.weight);
+			}
+		}
+
+		class Cat extends Animal{
+			constructor(name){
+				super(name);
+				this.lifes = 9;
+			}
+			log(){
+				super.log();
+				console.log(" "+this.lifes);
+			}
+		}
+
 		window.onload = function(evt){
+			var div = document.querySelector(".fields");
+			var score = document.querySelector(".fields-score");
+			var matrix = new Matrix(div);
+			matrix.create(div,15,10);
+			let fruits = new FruitSnake(matrix, [[4,10]], ["banana", "apple", "orange"]);
+
+				
+			fruits.show();
+			//(new FruitSnake(matrix, [[4,10]])).show();
+			(new WallSnake(matrix, [[2,2],[2,3],[2,4],[2,5],[2,6],[2,7]])).show();
+
+			var snake = new Snake(matrix, [[7,7],[7,6],[7,5]],"right", fruits.fruits);
+			snake.show();
+			timer = setInterval(function(){
+				snake.move();
+				
+				if(!snake.alive){
+					clearInterval(timer);
+					console.log("Game Over");
+				}
+				if(snake.fruit){
+					fruits.coords = fruits.randomFruit();
+					fruits.show();
+					score.innerHTML = +score.innerHTML + 1;
+				}
+			},300);
+
+
+			document.addEventListener("keyup", function(event){
+				 if (event.keyCode == 39) snake.course = "right"; 
+				 if (event.keyCode == 37) snake.course = "left"; 
+				 if (event.keyCode == 38) snake.course = "up"; 
+				 if (event.keyCode == 40) snake.course = "down"; 
+
+			});
+
+			let animals = [];
+			let a1 = new Animal("Bobik");
+			let a2 = new Cat("Murzik");
+			let a3 = new Animal("Huebik");
+			let a4 = new Cat("Huyuzik");
+			/*console.log(a2);
+			console.log(a2.constructor);*/
+			/*a2.eat();
+			a1.log();
+			a2.log();*/
+			animals.push(a1,a2,a3,a4)
+			for(let animal of animals){
+				/*animal.eat();
+				animal.log();*/
+			}
+
 
 			document.querySelectorAll(".cubes .cube").forEach(item=>{item.onclick = activeCube;});
 
